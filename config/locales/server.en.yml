@@ -1,0 +1,41 @@
+en:
+  auto_insert_wiki:
+    deal_template: |
+      [How do Deal Summaries work?](https://forum.506investorgroup.com/t/deal-summary-posts/3584)
+
+      ## Deal Summary
+
+      - Deal is <open/closed/evergreen>
+      - Type = <multifamily/office/levered debt/ etc …>
+      - Fund or Project = <fund/project>
+      - Scheduled Close = <date>
+      - Minimum = <amount>
+      - Special Terms for the Group = <describe>
+      - Callable = <describe>
+      - Lockup = <timeframe for evergreen funds>
+      - Hold Time = <years>
+      - Target IRR = <%>
+      - 1st Year COC = <%>
+      - Stabilized COC = <%>
+      - Fees = <describe>
+      - Waterfall = <describe>
+      - Member Liasion = <group member name>
+      - Sponsor Contact = <name and e-mail>
+      - Background Check Completed = <yes/no>
+      - IRA = <yes/no>
+      - 401k = <yes/no>
+      - UBIT = <no/UDFI/UBTI/or ??>
+      - Tax Form = <K-1/1099>
+
+      Links:
+      - due dilegence webpage
+      - applicable spreadsheets
+      - crowddd review
+      - ppm, quarterly reports, signup forms
+      - crowdstreet or other platform link
+      - webinar
+    deal_wiki: |
+      This topic does not yet have a summary. If you would like to add one, please click the button below to add a blank template, then wiki-edit to add information.
+
+      __wiki_edit_btn__
+    general_wiki: This topic does not yet have a summary. Please wiki-edit to add information.
