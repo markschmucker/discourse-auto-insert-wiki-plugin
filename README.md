@@ -1,7 +1,7 @@
 # discourse-auto-insert-wiki-plugin
 
 ## Requirements
-- `Summary` user is exists.
+- `Summary` user is exists with administrator permission.
 
 ## HOW-TO
 
