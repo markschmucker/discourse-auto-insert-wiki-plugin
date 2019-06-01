@@ -18,7 +18,7 @@ after_initialize {
 
     def bulk_insert
       @categories.each do |category|
-        raw = AutoInsertWiki.wiki_for(category)
+        raw = AutoInsertWiki.wiki_for(category.slug)
 
         category.topics.each do |topic|
           insert_wiki(topic, raw)
