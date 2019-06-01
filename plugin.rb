@@ -1,5 +1,5 @@
 # name: auto-insert-wiki
-# version: 0.1.0
+# version: 0.1.1
 # author: Muhlis Budi Cahyono <muhlisbc@gmail.com>
 # url: https://github.com/muhlisbc/discourse-auto-insert-wiki-plugin
 
@@ -8,7 +8,7 @@ after_initialize {
     attr_reader :category_slugs
 
     def initialize
-      @categories = Category.where(slug: %w(investments platforms staff misc liaisons))
+      @categories = Category.where(slug: %w(investments platforms misc))
       @category_slugs = @categories.pluck(:slug)
       username = Rails.env.production? ? "summary" : "discobot"
       @creator = User.find_by(username_lower: username)
@@ -35,22 +35,25 @@ after_initialize {
     def insert_wiki(topic, raw = nil)
       op = topic.first_post
 
-      return if op.wiki
-      topic.posts.order(post_number: :desc).each do |post|
-        post.update_column(:sort_order, post.sort_order + 1)
-        post.update_column(:post_number, post.post_number + 1)
-      end
+      return if (!op || op.wiki)
 
-      raw ||= begin
-        category_slug = topic.category.slug
-        parent_category_slug = topic.category.parent_category&.slug
-        AutoInsertWiki.wiki_for(category_slug, parent_category_slug)
-      end
+      Post.transaction {
+        topic.posts.order(post_number: :desc).each do |post|
+          post.update_column(:sort_order, post.sort_order + 1)
+          post.update_column(:post_number, post.post_number + 1)
+        end
 
-      post = PostCreator.create(@creator, raw: raw, topic_id: topic.id, no_bump: true)
-      post.update_column(:sort_order, 1)
-      post.update_column(:post_number, 1)
-      post.update_column(:wiki, true)
+        raw ||= begin
+          category_slug = topic.category.slug
+          parent_category_slug = topic.category.parent_category&.slug
+          AutoInsertWiki.wiki_for(category_slug, parent_category_slug)
+        end
+
+        post = PostCreator.create(@creator, raw: raw, topic_id: topic.id, no_bump: true)
+        post.update_column(:sort_order, 1)
+        post.update_column(:post_number, 1)
+        post.update_column(:wiki, true)
+      }
     end
 
     def self.wiki_map
