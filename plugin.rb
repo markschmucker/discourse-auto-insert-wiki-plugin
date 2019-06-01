@@ -10,7 +10,7 @@ after_initialize {
     def initialize
       @categories = Category.where(slug: %w(investments platforms misc))
       @category_slugs = @categories.pluck(:slug)
-      username = Rails.env.production? ? "Summary" : "discobot"
+      username = Rails.env.production? ? "summary" : "discobot"
       @creator = User.find_by(username_lower: username)
 
       raise "Can't find user: #{username}" unless @creator
