@@ -38,7 +38,7 @@ after_initialize {
       return if (!op || op.wiki)
 
       Post.transaction {
-        topic.posts.order(post_number: :desc).each do |post|
+        topic.posts.with_deleted.order(post_number: :desc).each do |post|
           post.update_column(:sort_order, post.sort_order + 1)
           post.update_column(:post_number, post.post_number + 1)
         end
