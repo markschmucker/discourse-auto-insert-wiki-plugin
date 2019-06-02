@@ -10,10 +10,7 @@ after_initialize {
     def initialize
       @categories = Category.where(slug: %w(investments platforms misc))
       @category_slugs = @categories.pluck(:slug)
-      username = Rails.env.production? ? "summary" : "discobot"
-      @creator = User.find_by(username_lower: username)
-
-      raise "Can't find user: #{username}" unless @creator
+      @creator = AutoInsertWiki.creator
     end
 
     def bulk_insert
@@ -49,7 +46,7 @@ after_initialize {
           AutoInsertWiki.wiki_for(category_slug, parent_category_slug)
         end
 
-        post = PostCreator.create(@creator, raw: raw, topic_id: topic.id, no_bump: true)
+        post = PostCreator.create(@creator, raw: raw, topic_id: topic.id, no_bump: true, created_at: op.created_at - 1.minute)
         post.update_column(:sort_order, 1)
         post.update_column(:post_number, 1)
         post.update_column(:wiki, true)
@@ -90,6 +87,17 @@ after_initialize {
       end
 
       I18n.t("auto_insert_wiki.#{template}_template")
+    end
+
+    def self.creator
+      @creator ||= begin
+        username = Rails.env.production? ? "summary" : "discobot"
+        _creator = User.find_by(username_lower: username)
+
+        raise "Can't find user: #{username}" unless _creator
+
+        _creator
+      end
     end
   end
 
@@ -135,5 +143,19 @@ after_initialize {
 
   ::Discourse::Application.routes.append do
     post "/auto-insert-wiki" => "auto_insert_wiki#create"
+  end
+
+  require_dependency "topic_list_item_serializer"
+  class ::TopicListItemSerializer
+    def posters
+      posters2 = object.posters || []
+      summary_user = posters2.find { |poster| poster.user.id == AutoInsertWiki.creator.id }
+
+      if summary_user
+        return [summary_user, *posters2.reject { |poster| poster.user.id == AutoInsertWiki.creator.id }]
+      end
+
+      posters2
+    end
   end
 }
