@@ -50,6 +50,8 @@ after_initialize {
         post.update_column(:sort_order, 1)
         post.update_column(:post_number, 1)
         post.update_column(:wiki, true)
+
+        Topic.reset_highest(topic.id)
       }
     end
 
