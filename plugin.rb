@@ -1,5 +1,5 @@
 # name: auto-insert-wiki
-# version: 0.1.1
+# version: 0.1.2
 # author: Muhlis Budi Cahyono <muhlisbc@gmail.com>
 # url: https://github.com/muhlisbc/discourse-auto-insert-wiki-plugin
 
@@ -156,6 +156,21 @@ after_initialize {
       end
 
       posters2
+    end
+  end
+
+  require_dependency "topic_posters_summary"
+  class ::TopicPostersSummary
+    def user_ids
+      orig = [ topic.user_id, topic.last_post_user_id, *topic.featured_user_ids ]
+      op = topic.first_post
+      creator = AutoInsertWiki.creator.id
+
+      if !op || !op.wiki || op.user_id != creator
+        return orig
+      end
+
+      orig.unshift creator
     end
   end
 }
