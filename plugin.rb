@@ -1,5 +1,5 @@
 # name: auto-insert-wiki
-# version: 0.1.2
+# version: 0.2.0
 # author: Muhlis Budi Cahyono <muhlisbc@gmail.com>
 # url: https://github.com/muhlisbc/discourse-auto-insert-wiki-plugin
 

@@ -17,16 +17,32 @@ function initWithApi(api) {
         btn.click(function() {
           if ($(this).hasClass("disabled")) return;
 
-          $(this).addClass("disabled");
+          const message = "You are about to add a blank Summary template to this topic. Please do this only if you will contribute to the summary. Are you sure?";
 
-          ajax("/auto-insert-wiki", { type: "POST", data: { id: topicId } })
-            .then((result) => {
-              //console.log(result);
-            })
-            .catch(popupAjaxError)
-            .finally(() => {
-              $(this).removeClass("disabled");
-            });
+          const buttons = [
+            {
+              label: "No",
+              class: "btn-danger"
+            },
+            {
+              label: "Yes",
+              class: "btn-primary",
+              callback: () => {
+                $(this).addClass("disabled");
+
+                ajax("/auto-insert-wiki", { type: "POST", data: { id: topicId } })
+                  .then((result) => {
+                    //console.log(result);
+                  })
+                  .catch(popupAjaxError)
+                  .finally(() => {
+                    $(this).removeClass("disabled");
+                  });
+              }
+            }
+          ];
+
+          bootbox.dialog(message, buttons);
         });
 
         parent.html(btn);
