@@ -6,6 +6,7 @@ en:
       ## Deal Summary
 
       - Deal is [open/closed/evergreen]
+      - Qualified? [Accredited/Qualified Client/Qualified Purchaser]
       - Type = [multifamily/office/levered debt/ etc …]
       - Fund or Project = [fund/project]
       - Scheduled Close = [date]
