@@ -8,7 +8,7 @@ after_initialize {
     attr_reader :category_slugs
 
     def initialize
-      @categories = Category.where(slug: %w(deals platforms misc))
+      @categories = Category.where(slug: %w(investments platforms misc))
       @category_slugs = @categories.pluck(:slug)
       @creator = AutoInsertWiki.creator
     end
@@ -57,7 +57,7 @@ after_initialize {
 
     def self.wiki_map
       {
-        "deals" => "deal",
+        "investments" => "deal",
         "platforms" => "general",
         "staff" => "general",
         "misc" => "general",
@@ -77,7 +77,7 @@ after_initialize {
 
     def self.templates_map
       {
-        "deals" => "deal"
+        "investments" => "deal"
       }
     end
 
