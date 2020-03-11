@@ -8,7 +8,7 @@ after_initialize {
     attr_reader :category_slugs
 
     def initialize
-      @categories = Category.where(slug: %w(investments platforms misc premium-investments))
+      @categories = Category.where(slug: %w(investments platforms misc premium-investments public-securities))
       @category_slugs = @categories.pluck(:slug)
       @creator = AutoInsertWiki.creator
     end
@@ -62,7 +62,8 @@ after_initialize {
         "platforms" => "general",
         "staff" => "general",
         "misc" => "general",
-        "liaisons" => "general"
+        "liaisons" => "general",
+        "public-securities" => "general"
       }
     end
 
