@@ -15,6 +15,7 @@ en:
       - Lockup = [timeframe for evergreen funds]
       - Hold Time = [years]
       - Target IRR = [%]
+      - Target Equity Multiple [X]
       - 1st Year COC = [%]
       - Stabilized COC = [%]
       - Fees = [describe]
