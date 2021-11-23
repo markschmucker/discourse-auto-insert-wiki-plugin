@@ -81,7 +81,8 @@ after_initialize {
     def self.templates_map
       {
         "investments" => "deal",
-        "premium-investments" => "deal"
+        "premium-investments" => "deal",
+        "crypto-funds-spv-s" => "deal"
       }
     end
 
