@@ -8,7 +8,7 @@ after_initialize {
     attr_reader :category_slugs
 
     def initialize
-      @categories = Category.where(slug: %w(investments platforms misc premium-investments public-securities crypto-funds-spv-s))
+      @categories = Category.where(slug: %w(investments platforms misc premium-investments public-securities crypto-funds-spv-s coins nft crypto-general crypto-tax-regulatory metaverse stablecoin))
       @category_slugs = @categories.pluck(:slug)
       @creator = AutoInsertWiki.creator
     end
@@ -64,7 +64,13 @@ after_initialize {
         "misc" => "general",
         "liaisons" => "general",
         "public-securities" => "general",
-        "crypto-funds-spv-s" => "deal"
+        "crypto-funds-spv-s" => "deal",
+        "coins" => "general",
+        "nft" => "general",
+        "crypto-general" => "general",
+        "crypto-tax-regulatory" => "general",
+        "metaverse" => "general",
+        "stablecoin" => "general"
       }
     end
 
