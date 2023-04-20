@@ -58,7 +58,7 @@ after_initialize {
     def self.wiki_map
       {
         "investments" => "deal",
-        "premium-investments" => "deal",
+        "protected-investments" => "deal",
         "platforms" => "general",
         "staff" => "general",
         "misc" => "general",
