@@ -10,7 +10,7 @@ function initWithApi(api) {
 
       if (el.length && topic.length) {
         const parent = el.parent("p");
-        const currentUser = Discourse.User.current();
+        const currentUser = api.getCurrentUser();
         const btn = $(`<button class="btn btn-large btn-primary ${currentUser ? '' : 'disabled'}">Add Summary</button>`);
         const topicId = topic.data("topic-id");
 
