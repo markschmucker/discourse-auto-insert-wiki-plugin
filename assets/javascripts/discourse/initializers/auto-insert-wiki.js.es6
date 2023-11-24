@@ -11,14 +11,6 @@ function initWithApi(api) {
       if (el.length && topic.length) {
         const parent = el.parent("p");
 
-        // Nov 2023 the old way of getting the username was deprecated and the new way- using the api-
-        // somehow has a side effect that breaks the bootbox dialog below. Anyway the currentUser was
-        // only used to determine whether to enable the Add Summary button, and that's not necessary
-        // since we don't allow anonymous access, so I'm reming the check and hopefully sidestep the
-        // issue.
-        // const currentUser = api.getCurrentUser();
-        // const btn = $(`<button class="btn btn-large btn-primary ${currentUser ? '' : 'disabled'}">Add Summary</button>`);
-
         const btn = $(`<button class="btn btn-large btn-primary">Add Summary</button>`);
 
         const topicId = topic.data("topic-id");
@@ -27,8 +19,6 @@ function initWithApi(api) {
           if ($(this).hasClass("disabled")) return;
 
           const dialogMessage = "You are about to add a blank Summary template to this topic. Please do this only if you will contribute to the summary. Are you sure?";
-          // Why is dialogMessage undefined?
-          console.log(dialogMessage);
 
           const buttons = [
             {
