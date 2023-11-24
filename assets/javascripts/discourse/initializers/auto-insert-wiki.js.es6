@@ -23,10 +23,12 @@ function initWithApi(api) {
 
         const topicId = topic.data("topic-id");
 
-        btn.click(function() {
+        btn.click(() => {
           if ($(this).hasClass("disabled")) return;
 
           const dialogMessage = "You are about to add a blank Summary template to this topic. Please do this only if you will contribute to the summary. Are you sure?";
+          // Why is dialogMessage undefined?
+          console.log(dialogMessage);
 
           const buttons = [
             {
