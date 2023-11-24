@@ -17,7 +17,7 @@ function initWithApi(api) {
         btn.click(function() {
           if ($(this).hasClass("disabled")) return;
 
-          const message = "You are about to add a blank Summary template to this topic. Please do this only if you will contribute to the summary. Are you sure?";
+          const dialogMessage = "You are about to add a blank Summary template to this topic. Please do this only if you will contribute to the summary. Are you sure?";
 
           const buttons = [
             {
@@ -42,7 +42,7 @@ function initWithApi(api) {
             }
           ];
 
-          bootbox.dialog(message, buttons);
+          bootbox.dialog(dialogMessage, buttons);
         });
 
         parent.html(btn);
