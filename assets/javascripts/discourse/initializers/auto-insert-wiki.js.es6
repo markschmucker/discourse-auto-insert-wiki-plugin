@@ -2,13 +2,13 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { getOwnerWithFallback } from "discourse-common/lib/get-owner";
-import { schedule } from "@ember/runloop";
+import { schedule, next } from "@ember/runloop";
 import { htmlSafe } from "@ember/template";
 
 function initWithApi(api) {
   api.decorateCooked(
     (cooked) => {
-      Ember.run.next(cooked, function () {
+      next(cooked, function () {
         const el = this.find("strong:contains(wiki_edit_btn)");
         const topic = $("#topic");
 
